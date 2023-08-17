@@ -73,7 +73,7 @@ module.exports = withLess({
         'home-page-card-icon-color': '#141414',
         // Set cookie banner styles.
         'cookie-banner-text': '#000',
-        'cookie-banner-back': '@accent-color',
+        'cookie-banner-back': '#EFEFEF',
         'link-color': '#0000ee',
         'link-hover-color': '#0000eea8',
       },
