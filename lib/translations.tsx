@@ -75,6 +75,7 @@ export const HOME_PAGE_DYNAMIC_CONTENT_PLACEHOLDERS = [
   'DEFAULT_SERVICE_MAP_ALL_CITIES_OPTION',
   'DEFAULT_SERVICE_MAP_ALL_CATEGORIES_OPTION',
   'default_service_map_my_location_option',
+  'default_no_cities_placeholder',
 ];
 
 export const CATEGORY_PLACEHOLDERS = [
@@ -146,8 +147,8 @@ export function populateServiceMapStrings(dynamicContent: {
       dynamicContent['default_services_list_count_services'],
     mapTab: dynamicContent['default_service_map_map_tab'],
     listTab: dynamicContent['default_service_map_list_tab'],
-    allRegionsOption: dynamicContent['DEFAULT_SERVICE_MAP_ALL_REGIONS_OPTION'],
-    allCitiesOption: dynamicContent['DEFAULT_SERVICE_MAP_ALL_CITIES_OPTION'],
+    allRegionsOption: dynamicContent['default_service_map_all_regions'],
+    allCitiesOption: dynamicContent['default_service_map_all_cities'],
     allCategoriesOption:
       dynamicContent['DEFAULT_SERVICE_MAP_ALL_CATEGORIES_OPTION'],
     myLocationOption: dynamicContent['default_service_map_my_location_option'],
@@ -156,6 +157,9 @@ export function populateServiceMapStrings(dynamicContent: {
     allProvidersOption: '',
     allServicesTypeOption: '',
     distanceAwayStrings: { informationTooltip: '' },
+    popupStrings: { contactButtonLabel: '', viewServiceLabel: '' },
+    labelSearchInput: { label: '' },
+    noCityString: dynamicContent['default_no_cities_placeholder'],
   };
 }
 

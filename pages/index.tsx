@@ -190,6 +190,7 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
         services,
         defaultCoords: MAP_DEFAULT_COORDS,
         shareButton: getShareButtonStrings(dynamicContent),
+        currentLocale,
       },
       categories,
       aboutUsTextHtml,

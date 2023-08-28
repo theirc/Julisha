@@ -16,7 +16,7 @@ const langs: Lang[] = [
   },
   {
     langShort: 'so',
-    langLong: 'Soomali',
+    langLong: 'Somali',
   },
   {
     langShort: 'sw',

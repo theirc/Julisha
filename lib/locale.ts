@@ -7,10 +7,15 @@ export { Locale };
 
 // Keep LOCALES and 'getLocaleFromCode' in sync with locales configured in /next.config.js.
 export const LOCALES: { [key: string]: Locale } = {
-  'en-us': { url: 'en-us', direction: 'ltr', name: 'English' },
-  so: { url: 'so', direction: 'ltr', name: 'Soomali' },
-  sw: { url: 'sw', direction: 'ltr', name: 'Kiswahili' },
-  ar: { url: 'ar', direction: 'rtl', name: 'عربي' },
+  'en-us': {
+    url: 'en-us',
+    direction: 'ltr',
+    name: 'English',
+    directus: 'en-US',
+  },
+  so: { url: 'so', direction: 'ltr', name: 'Somali', directus: 'so-SO' },
+  sw: { url: 'sw', direction: 'ltr', name: 'Kiswahili', directus: 'sw-KE' },
+  ar: { url: 'ar', direction: 'rtl', name: 'عربي', directus: 'ar-SA' },
 };
 
 export const LOCALE_CODES_TO_CANONICAL_LOCALE_CODES: { [key: string]: string } =
