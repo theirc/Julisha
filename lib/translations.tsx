@@ -9,6 +9,7 @@ import { HeaderBannerStrings } from '@ircsignpost/signpost-base/dist/src/header-
 import { HomePageStrings } from '@ircsignpost/signpost-base/dist/src/home-page';
 import { CardsListStrings } from '@ircsignpost/signpost-base/dist/src/home-page-cards-list';
 import { PopupStrings } from '@ircsignpost/signpost-base/dist/src/map';
+import { RecentArticlesStrings } from '@ircsignpost/signpost-base/dist/src/recent-articles';
 import { SearchBarStrings } from '@ircsignpost/signpost-base/dist/src/search-bar';
 import { SearchResultsPageStrings } from '@ircsignpost/signpost-base/dist/src/search-results-page';
 import { SearchResultsStrings } from '@ircsignpost/signpost-base/dist/src/search-results-page-content';
@@ -68,6 +69,22 @@ export const COMMON_DYNAMIC_CONTENT_PLACEHOLDERS = [
   'default_saturday_label',
   'default_sunday_label',
   'default_menu_disclaimer_title',
+  'default_opening_hours_label',
+  'default_address_label',
+  'default_description_label',
+  'default_banner_facebook_title',
+  'default_banner_whatsapp_title',
+  'default_skype_label',
+  'default_signal_label',
+  'default_banner_telephone_title',
+  'default_linkedin_label',
+  'default_monday_label',
+  'default_tuesday_label',
+  'default_wednesday_label',
+  'default_thursday_label',
+  'default_friday_label',
+  'default_saturday_label',
+  'default_sunday_label',
 ];
 
 export const HOME_PAGE_DYNAMIC_CONTENT_PLACEHOLDERS = [
@@ -78,9 +95,11 @@ export const HOME_PAGE_DYNAMIC_CONTENT_PLACEHOLDERS = [
   'default_banner_facebook_title',
   'default_banner_messenger_title',
   'default_banner_whatsapp_title',
+  'default_banner_whatsappchannel_title',
   'signpost_julisha_facebook_link',
   'signpost_julisha_messenger_link',
   'signpost_julisha_whatsapp_link',
+  'signpost_julisha_whatsappchannel_link',
 
   // Main body strings.
   'default_information_title',
@@ -110,6 +129,15 @@ export const HOME_PAGE_DYNAMIC_CONTENT_PLACEHOLDERS = [
   'default_seach_input_text',
   'default_contact_button_label',
   'default_view_service_label',
+  'default_contact_button_label',
+  'default_view_service_label',
+  'default_select_topic',
+  'default_select_subtopic',
+  'default_recent_articles_title',
+  'default_service_type_label',
+  'default_accessibility_label',
+  'default_populations_label',
+  'default_providers_label',
 ];
 
 export const CATEGORY_PLACEHOLDERS = [
@@ -142,13 +170,17 @@ export function populateSocialMediaLinks(dynamicContent: {
       title: dynamicContent['default_banner_facebook_title'],
       href: dynamicContent['signpost_julisha_facebook_link'],
     },
+    messengerLink: {
+      title: dynamicContent['default_banner_messenger_title'],
+      href: dynamicContent['signpost_julisha_messenger_link'],
+    },
     whatsappLink: {
       title: dynamicContent['default_banner_whatsapp_title'],
       href: dynamicContent['signpost_julisha_whatsapp_link'],
     },
-    messengerLink: {
-      title: dynamicContent['default_banner_messenger_title'],
-      href: dynamicContent['signpost_julisha_messenger_link'],
+    whatsappChannelLink: {
+      title: dynamicContent['default_banner_whatsappchannel_title'],
+      href: dynamicContent['signpost_julisha_whatsappchannel_link'],
     },
   };
 }
@@ -196,6 +228,10 @@ export function populateServiceMapStrings(dynamicContent: {
     },
     popupStrings: populatePopupStrings(dynamicContent),
     labelSearchInput: { label: dynamicContent['default_seach_input_text'] },
+    labelServicesTypes: dynamicContent['default_service_type_label'],
+    labelAccessibility: dynamicContent['default_accessibility_label'],
+    labelPopulations: dynamicContent['default_populations_label'],
+    labelProvider: dynamicContent['default_providers_label'],
   };
 }
 
@@ -278,8 +314,6 @@ export function getSelectTopicLabel(dynamicContent: {
   return dynamicContent['default_select_topic'];
 }
 
-// TODO(annkats): add populateServiceMapStrings() once Service map becomes a Shared component.
-
 export function populateArticleContentStrings(dynamicContent: {
   [key: string]: string;
 }): ArticleContentStrings {
@@ -309,6 +343,7 @@ export function populateHomePageStrings(dynamicContent: {
     serviceMapStrings: populateServiceMapStrings(dynamicContent),
     searchBarStrings: populateSearchBarStrings(dynamicContent),
     footerStrings: populateFooterStrings(dynamicContent),
+    recentArticlesStrings: populateRecentArticlesStrings(dynamicContent),
   };
 }
 
@@ -418,6 +453,17 @@ export function populateServicePageStrings(dynamicContent: {
     serviceErrorStrings: generateArticleErrorProps(dynamicContent),
     lastUpdatedLabel: getLastUpdatedLabel(dynamicContent),
     footerStrings: populateFooterStrings(dynamicContent),
+  };
+}
+
+export function populateRecentArticlesStrings(dynamicContent: {
+  [key: string]: string;
+}): RecentArticlesStrings {
+  return {
+    recentArticlesTitle: dynamicContent['default_recent_articles_title'],
+    lastUpdatedLabel: dynamicContent['default_last_updated'],
+    selectTopicLabel: dynamicContent['default_select_topic'],
+    selectSubTopicLabel: dynamicContent['default_select_subtopic'],
   };
 }
 

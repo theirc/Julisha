@@ -12,6 +12,7 @@ export const MAP_DEFAULT_COORDS: LatLngExpression = [0.0236, 37.9062];
 export const REVALIDATION_TIMEOUT_SECONDS: number = 1 * 60 * 60;
 
 export const ABOUT_US_ARTICLE_ID: number = 12936839545245;
+export const USE_RECENT_ARTICLES = true;
 
 // The information hierary of the website.
 // Set to true for the category -> section -> article hierarchy, similar to that of United for Ukraine.
@@ -75,5 +76,5 @@ export const SEARCH_RESULTS_PAGE_INDEX: AlgoliaSearchIndex = {
 };
 
 export const DIRECTUS_AUTH_TOKEN = process.env.DIRECTUS_TOKEN ?? '';
-export const DIRECTUS_COUNTRY_ID = 0; // TODO: replace with the country ID from directus
-export const DIRECTUS_INSTANCE = ''; // TODO: add the url from the directus instance you want to fetch data from
+export const DIRECTUS_COUNTRY_ID = 13;
+export const DIRECTUS_INSTANCE = 'https://directus-irc.azurewebsites.net/';

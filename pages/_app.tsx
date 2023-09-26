@@ -13,11 +13,14 @@ import '@ircsignpost/signpost-base/styles/home-page-card.less';
 import '@ircsignpost/signpost-base/styles/home-page-cards-list.less';
 import '@ircsignpost/signpost-base/styles/locale-select-page.less';
 import '@ircsignpost/signpost-base/styles/preview-banner.less';
+import '@ircsignpost/signpost-base/styles/recent-articles.less';
 import '@ircsignpost/signpost-base/styles/responsive.less';
 import '@ircsignpost/signpost-base/styles/search-bar.less';
 import '@ircsignpost/signpost-base/styles/search-results-page.less';
 import '@ircsignpost/signpost-base/styles/select-menu.less';
 import '@ircsignpost/signpost-base/styles/service-map.less';
+import '@ircsignpost/signpost-base/styles/service-content.less';
+
 import '@ircsignpost/signpost-base/styles/map.less';
 import '@ircsignpost/signpost-base/styles/service-list.less';
 import '@ircsignpost/signpost-base/styles/cookie-banner.less';

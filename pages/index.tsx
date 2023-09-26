@@ -14,14 +14,11 @@ import HomePage, {
 import { MenuOverlayItem } from '@ircsignpost/signpost-base/dist/src/menu-overlay';
 import { ServiceMapProps } from '@ircsignpost/signpost-base/dist/src/service-map';
 import {
-  fetchRegions,
-  fetchServices,
-  fetchServicesCategories,
-} from '@ircsignpost/signpost-base/dist/src/service-map-common';
-import {
   CategoryWithSections,
+  ZendeskArticle,
   ZendeskCategory,
   getArticle,
+  getArticles,
   getCategories,
   getCategoriesWithSections,
   getTranslationsFromDynamicContent,
@@ -34,7 +31,6 @@ import {
   ABOUT_US_ARTICLE_ID,
   CATEGORIES_TO_HIDE,
   CATEGORY_ICON_NAMES,
-  COUNTRY_ID,
   DIRECTUS_AUTH_TOKEN,
   DIRECTUS_COUNTRY_ID,
   DIRECTUS_INSTANCE,
@@ -45,6 +41,7 @@ import {
   SECTION_ICON_NAMES,
   SITE_TITLE,
   USE_CAT_SEC_ART_CONTENT_STRUCTURE,
+  USE_RECENT_ARTICLES,
   ZENDESK_AUTH_HEADER,
 } from '../lib/constants';
 import {
@@ -79,6 +76,8 @@ interface HomeProps {
   aboutUsTextHtml: string;
   categories: ZendeskCategory[] | CategoryWithSections[];
   footerLinks?: MenuOverlayItem[];
+  articles: ZendeskArticle[];
+  articleCategories: CategoryWithSections[];
 }
 
 const Home: NextPage<HomeProps> = ({
@@ -91,6 +90,8 @@ const Home: NextPage<HomeProps> = ({
   aboutUsTextHtml,
   categories,
   footerLinks,
+  articles,
+  articleCategories,
 }) => {
   const { publicRuntimeConfig } = getConfig();
 
@@ -110,6 +111,12 @@ const Home: NextPage<HomeProps> = ({
       serviceMapProps={serviceMapProps}
       aboutUsTextHtml={aboutUsTextHtml}
       categories={categories}
+      hasRecentArticles={USE_RECENT_ARTICLES}
+      CATEGORIES_TO_HIDE={CATEGORIES_TO_HIDE}
+      CATEGORY_ICON_NAMES={CATEGORY_ICON_NAMES}
+      SECTION_ICON_NAMES={SECTION_ICON_NAMES}
+      articles={articles}
+      articleCategories={articleCategories}
       footerLinks={footerLinks}
       signpostVersion={publicRuntimeConfig?.version}
       cookieBanner={
@@ -168,11 +175,6 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
     !!aboutUsArticle
   );
 
-  const footerLinks = getFooterItems(
-    populateMenuOverlayStrings(dynamicContent),
-    categories
-  );
-
   const strings = populateHomePageStrings(dynamicContent);
 
   const directus = new Directus(DIRECTUS_INSTANCE);
@@ -183,15 +185,22 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
     directus,
     currentLocale.directus
   );
+  const serviceTypes = await getDirectusServiceCategories(directus);
+  const providers = await getDirectusProviders(directus, DIRECTUS_COUNTRY_ID);
+  const populations = await getDirectusPopulationsServed(directus);
+  const accessibility = await getDirectusAccessibility(directus);
 
   services?.sort((a, b) =>
     a.name?.normalize().localeCompare(b.name?.normalize())
   );
 
-  const serviceTypes = await getDirectusServiceCategories(directus);
-  const providers = await getDirectusProviders(directus, DIRECTUS_COUNTRY_ID);
-  const populations = await getDirectusPopulationsServed(directus);
-  const accessibility = await getDirectusAccessibility(directus);
+  const articles = await getArticles(currentLocale, getZendeskUrl());
+
+  const articleCategories = await getCategoriesWithSections(
+    currentLocale,
+    getZendeskUrl(),
+    (c) => !CATEGORIES_TO_HIDE.includes(c.id)
+  );
 
   const footerLinks = getFooterItems(
     populateMenuOverlayStrings(dynamicContent),
@@ -218,6 +227,8 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
       categories,
       aboutUsTextHtml,
       footerLinks,
+      articles,
+      articleCategories,
     },
     revalidate: REVALIDATION_TIMEOUT_SECONDS,
   };
