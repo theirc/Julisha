@@ -8,11 +8,14 @@ import { FooterStrings } from '@ircsignpost/signpost-base/dist/src/footer';
 import { HeaderBannerStrings } from '@ircsignpost/signpost-base/dist/src/header-banner';
 import { HomePageStrings } from '@ircsignpost/signpost-base/dist/src/home-page';
 import { CardsListStrings } from '@ircsignpost/signpost-base/dist/src/home-page-cards-list';
+import { PopupStrings } from '@ircsignpost/signpost-base/dist/src/map';
+import { RecentArticlesStrings } from '@ircsignpost/signpost-base/dist/src/recent-articles';
 import { SearchBarStrings } from '@ircsignpost/signpost-base/dist/src/search-bar';
 import { SearchResultsPageStrings } from '@ircsignpost/signpost-base/dist/src/search-results-page';
 import { SearchResultsStrings } from '@ircsignpost/signpost-base/dist/src/search-results-page-content';
 import { SectionStrings } from '@ircsignpost/signpost-base/dist/src/section-page';
 import { ServiceMapStrings } from '@ircsignpost/signpost-base/dist/src/service-map';
+import { ServicePageStrings } from '@ircsignpost/signpost-base/dist/src/service-page';
 import { ShareButtonStrings } from '@ircsignpost/signpost-base/dist/src/share-button';
 
 import { CustomMenuOverlayStrings } from './menu';
@@ -51,9 +54,11 @@ export const HOME_PAGE_DYNAMIC_CONTENT_PLACEHOLDERS = [
   'default_banner_facebook_title',
   'default_banner_messenger_title',
   'default_banner_whatsapp_title',
+  'default_banner_whatsappchannel_title',
   'signpost_julisha_facebook_link',
   'signpost_julisha_messenger_link',
   'signpost_julisha_whatsapp_link',
+  'signpost_julisha_whatsappchannel_link',
 
   // Main body strings.
   'default_information_title',
@@ -75,6 +80,16 @@ export const HOME_PAGE_DYNAMIC_CONTENT_PLACEHOLDERS = [
   'DEFAULT_SERVICE_MAP_ALL_CITIES_OPTION',
   'DEFAULT_SERVICE_MAP_ALL_CATEGORIES_OPTION',
   'default_service_map_my_location_option',
+  'default_all_services_type_option',
+  'default_all_providers_option',
+  'default_all_populations_option',
+  'default_all_accessibilities_option',
+  'default_distance_away_tooltip',
+  'default_contact_button_label',
+  'default_view_service_label',
+  'default_select_topic',
+  'default_select_subtopic',
+  'default_recent_articles_title',
 ];
 
 export const CATEGORY_PLACEHOLDERS = [
@@ -107,13 +122,17 @@ export function populateSocialMediaLinks(dynamicContent: {
       title: dynamicContent['default_banner_facebook_title'],
       href: dynamicContent['signpost_julisha_facebook_link'],
     },
+    messengerLink: {
+      title: dynamicContent['default_banner_messenger_title'],
+      href: dynamicContent['signpost_julisha_messenger_link'],
+    },
     whatsappLink: {
       title: dynamicContent['default_banner_whatsapp_title'],
       href: dynamicContent['signpost_julisha_whatsapp_link'],
     },
-    messengerLink: {
-      title: dynamicContent['default_banner_messenger_title'],
-      href: dynamicContent['signpost_julisha_messenger_link'],
+    whatsappChannelLink: {
+      title: dynamicContent['default_banner_whatsappchannel_title'],
+      href: dynamicContent['signpost_julisha_whatsappchannel_link'],
     },
   };
 }
@@ -151,11 +170,15 @@ export function populateServiceMapStrings(dynamicContent: {
     allCategoriesOption:
       dynamicContent['DEFAULT_SERVICE_MAP_ALL_CATEGORIES_OPTION'],
     myLocationOption: dynamicContent['default_service_map_my_location_option'],
-    allAccessibilitiesOption: '',
-    allPopulationsOption: '',
-    allProvidersOption: '',
-    allServicesTypeOption: '',
-    distanceAwayStrings: { informationTooltip: '' },
+    allServicesTypeOption: dynamicContent['default_all_services_type_option'],
+    allProvidersOption: dynamicContent['default_all_providers_option'],
+    allPopulationsOption: dynamicContent['default_all_populations_option'],
+    allAccessibilitiesOption:
+      dynamicContent['default_all_accessibilities_option'],
+    distanceAwayStrings: {
+      informationTooltip: dynamicContent['default_distance_away_tooltip'],
+    },
+    popupStrings: populatePopupStrings(dynamicContent),
   };
 }
 
@@ -238,8 +261,6 @@ export function getSelectTopicLabel(dynamicContent: {
   return dynamicContent['default_select_topic'];
 }
 
-// TODO(annkats): add populateServiceMapStrings() once Service map becomes a Shared component.
-
 export function populateArticleContentStrings(dynamicContent: {
   [key: string]: string;
 }): ArticleContentStrings {
@@ -269,6 +290,7 @@ export function populateHomePageStrings(dynamicContent: {
     serviceMapStrings: populateServiceMapStrings(dynamicContent),
     searchBarStrings: populateSearchBarStrings(dynamicContent),
     footerStrings: populateFooterStrings(dynamicContent),
+    recentArticlesStrings: populateRecentArticlesStrings(dynamicContent),
   };
 }
 
@@ -356,5 +378,38 @@ export function populateFilterSelectStrings(dynamicContent: {
     filterLabel: dynamicContent['default_filter_label'],
     mostRecent: dynamicContent['default_most_recent_filter_option'],
     mostPopular: dynamicContent['default_most_popular_filter_option'],
+  };
+}
+
+export function populatePopupStrings(dynamicContent: {
+  [key: string]: string;
+}): PopupStrings {
+  return {
+    contactButtonLabel: dynamicContent['default_contact_button_label'],
+    viewServiceLabel: dynamicContent['default_view_service_label'],
+  };
+}
+
+export function populateServicePageStrings(dynamicContent: {
+  [key: string]: string;
+}): ServicePageStrings {
+  return {
+    serviceContentStrings: populateArticleContentStrings(dynamicContent),
+    searchBarStrings: populateSearchBarStrings(dynamicContent),
+    cookieBannerStrings: populateCookieBannerStrings(dynamicContent),
+    serviceErrorStrings: generateArticleErrorProps(dynamicContent),
+    lastUpdatedLabel: getLastUpdatedLabel(dynamicContent),
+    footerStrings: populateFooterStrings(dynamicContent),
+  };
+}
+
+export function populateRecentArticlesStrings(dynamicContent: {
+  [key: string]: string;
+}): RecentArticlesStrings {
+  return {
+    recentArticlesTitle: dynamicContent['default_recent_articles_title'],
+    lastUpdatedLabel: dynamicContent['default_last_updated'],
+    selectTopicLabel: dynamicContent['default_select_topic'],
+    selectSubTopicLabel: dynamicContent['default_select_subtopic'],
   };
 }

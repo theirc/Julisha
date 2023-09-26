@@ -147,10 +147,11 @@ export default function Category({
       pageTitle={pageTitle}
       categoryId={categoryId}
       categoryItems={categoryItems}
-      sections={sections}
+      sections={sectionDisplayed}
       menuOverlayItems={menuOverlayItems}
       headerLogoProps={getHeaderLogoProps(currentLocale)}
       searchBarIndex={SEARCH_BAR_INDEX}
+      signpostVersion={publicRuntimeConfig?.version}
       cookieBanner={
         <CookieBanner
           strings={strings.cookieBannerStrings}
@@ -166,7 +167,6 @@ export default function Category({
       sectionFilterItems={sectionFilterItems}
       onSectionFilterChange={handleSectionFilterChange}
       footerLinks={footerLinks}
-      signpostVersion={publicRuntimeConfig?.version}
     />
   );
 }
@@ -266,6 +266,11 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
     !!aboutUsArticle
   );
 
+  const footerLinks = getFooterItems(
+    populateMenuOverlayStrings(dynamicContent),
+    categories
+  );
+
   const sections = await getSectionsForCategory(
     currentLocale,
     Number(params?.category),
@@ -285,11 +290,6 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
   const filterItems: MenuItem[] = [
     { name: filterSelectStrings.mostRecent, value: 'updated_at' },
   ];
-
-  const footerLinks = getFooterItems(
-    populateMenuOverlayStrings(dynamicContent),
-    categories
-  );
 
   return {
     props: {
