@@ -90,6 +90,11 @@ export const HOME_PAGE_DYNAMIC_CONTENT_PLACEHOLDERS = [
   'default_select_topic',
   'default_select_subtopic',
   'default_recent_articles_title',
+  'labelAccessibility',
+  'labelProvider',
+  'labelPopulations',
+  'labelServicesTypes',
+  'default_seach_input_text',
 ];
 
 export const CATEGORY_PLACEHOLDERS = [
@@ -179,6 +184,11 @@ export function populateServiceMapStrings(dynamicContent: {
       informationTooltip: dynamicContent['default_distance_away_tooltip'],
     },
     popupStrings: populatePopupStrings(dynamicContent),
+    labelAccessibility: dynamicContent['labelAccessibility'],
+    labelProvider: dynamicContent['labelProvider'],
+    labelPopulations: dynamicContent['labelPopulations'],
+    labelServicesTypes: dynamicContent['labelServicesTypes'],
+    labelSearchInput: { label: dynamicContent['default_seach_input_text'] },
   };
 }
 

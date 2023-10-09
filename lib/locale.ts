@@ -14,7 +14,7 @@ export const LOCALES: { [key: string]: Locale } = {
     directus: 'en-US',
   },
   so: { url: 'so', direction: 'ltr', name: 'Somali', directus: 'so-SO' },
-  sw: { url: 'sw', direction: 'ltr', name: 'Kiswahili', directus: 'sw-KE' },
+  sw: { url: 'sw', direction: 'ltr', name: 'Kiswahili', directus: 'sw-SW' },
   ar: { url: 'ar', direction: 'rtl', name: 'عربي', directus: 'ar-SA' },
 };
 
