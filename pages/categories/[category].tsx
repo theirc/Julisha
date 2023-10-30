@@ -1,11 +1,17 @@
 import CategoryPage, {
-  CategoryStrings, // TODO Use real signpost-base/Zendesk API implementation.
-  // getSectionsForCategory,
+  CategoryStrings,
+  getCategorySection,
+  getSectionsForCategory,
 } from '@ircsignpost/signpost-base/dist/src/category-page';
 import CookieBanner from '@ircsignpost/signpost-base/dist/src/cookie-banner';
 import { MenuOverlayItem } from '@ircsignpost/signpost-base/dist/src/menu-overlay';
 import { MenuItem } from '@ircsignpost/signpost-base/dist/src/select-menu';
 import { Section } from '@ircsignpost/signpost-base/dist/src/topic-with-articles';
+import {
+  getArticle,
+  getCategories,
+  getTranslationsFromDynamicContent,
+} from '@ircsignpost/signpost-base/dist/src/zendesk';
 import { GetStaticProps } from 'next';
 import getConfig from 'next/config';
 import { useEffect, useState } from 'react';
@@ -34,19 +40,9 @@ import {
   COMMON_DYNAMIC_CONTENT_PLACEHOLDERS,
   getLastUpdatedLabel,
   populateCategoryStrings,
-  populateFilterSelectStrings,
   populateMenuOverlayStrings,
 } from '../../lib/translations';
 import { getZendeskMappedUrl, getZendeskUrl } from '../../lib/url';
-// TODO Use real Zendesk API implementation.
-import {
-  getArticle,
-  getArticlesForSection,
-  getCategories,
-  getCategorySection,
-  getSectionsForCategory,
-  getTranslationsFromDynamicContent,
-} from '../../lib/zendesk-fake';
 
 interface CategoryProps {
   currentLocale: Locale;
@@ -104,6 +100,7 @@ export default function Category({
       menuOverlayItems={menuOverlayItems}
       headerLogoProps={getHeaderLogoProps(currentLocale)}
       searchBarIndex={SEARCH_BAR_INDEX}
+      signpostVersion={publicRuntimeConfig?.version}
       cookieBanner={
         <CookieBanner
           strings={strings.cookieBannerStrings}
@@ -115,7 +112,6 @@ export default function Category({
       sectionFilterItems={sectionFilterItems}
       onSectionFilterChange={handleSectionFilterChange}
       footerLinks={footerLinks}
-      signpostVersion={publicRuntimeConfig?.version}
     />
   );
 }
@@ -215,7 +211,11 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
     !!aboutUsArticle
   );
 
-  // TODO Use real Zendesk API instead of the faked one.
+  const footerLinks = getFooterItems(
+    populateMenuOverlayStrings(dynamicContent),
+    categories
+  );
+
   const sections = await getSectionsForCategory(
     currentLocale,
     Number(params?.category),
@@ -229,11 +229,6 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
       value: section.id,
     };
   });
-
-  const footerLinks = getFooterItems(
-    populateMenuOverlayStrings(dynamicContent),
-    categories
-  );
 
   return {
     props: {

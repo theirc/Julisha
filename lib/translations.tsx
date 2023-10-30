@@ -9,6 +9,7 @@ import { HeaderBannerStrings } from '@ircsignpost/signpost-base/dist/src/header-
 import { HomePageStrings } from '@ircsignpost/signpost-base/dist/src/home-page';
 import { CardsListStrings } from '@ircsignpost/signpost-base/dist/src/home-page-cards-list';
 import { PopupStrings } from '@ircsignpost/signpost-base/dist/src/map';
+import { RecentArticlesStrings } from '@ircsignpost/signpost-base/dist/src/recent-articles';
 import { SearchBarStrings } from '@ircsignpost/signpost-base/dist/src/search-bar';
 import { SearchResultsPageStrings } from '@ircsignpost/signpost-base/dist/src/search-results-page';
 import { SearchResultsStrings } from '@ircsignpost/signpost-base/dist/src/search-results-page-content';
@@ -67,26 +68,43 @@ export const COMMON_DYNAMIC_CONTENT_PLACEHOLDERS = [
   'default_friday_label',
   'default_saturday_label',
   'default_sunday_label',
+  'default_menu_disclaimer_title',
+  'default_opening_hours_label',
+  'default_address_label',
+  'default_description_label',
+  'default_banner_facebook_title',
+  'default_banner_whatsapp_title',
+  'default_skype_label',
+  'default_signal_label',
+  'default_banner_telephone_title',
+  'default_linkedin_label',
+  'default_monday_label',
+  'default_tuesday_label',
+  'default_wednesday_label',
+  'default_thursday_label',
+  'default_friday_label',
+  'default_saturday_label',
+  'default_sunday_label',
 ];
 
 export const HOME_PAGE_DYNAMIC_CONTENT_PLACEHOLDERS = [
   // Header banner and social media strings.
-  /*
-   * TODO: create Dynamic content ID for mission statement.
-  '<website_name>_mission_statement',
-   */
+  'signppost_julisha_mission_statement',
   'default_banner_social_media_title',
   'default_banner_social_media_description',
   'default_banner_facebook_title',
   'default_banner_messenger_title',
   'default_banner_whatsapp_title',
+  'default_banner_whatsappchannel_title',
+  'signpost_julisha_facebook_link',
+  'signpost_julisha_messenger_link',
+  'signpost_julisha_whatsapp_link',
+  'signpost_julisha_whatsappchannel_link',
+
   // Main body strings.
   'default_information_title',
-  /*
-  //TODO: Replace and create customized dynamic content for information description.
-  '<site_prefix>_information_description',
-  */
-  'default_information_description',
+  'signpost_julisha_mission_statement',
+  'signpost_julisha_information_description',
   'default_service_map_title',
   'default_service_map_description',
   'default_service_map_select_region',
@@ -99,9 +117,9 @@ export const HOME_PAGE_DYNAMIC_CONTENT_PLACEHOLDERS = [
   'default_service_map_map_tab',
   'default_service_map_list_tab',
   'default_service_map_all_services',
-  'default_service_map_all_regions_option',
-  'default_service_map_all_cities_option',
-  'default_service_map_all_categories_option',
+  'DEFAULT_SERVICE_MAP_ALL_REGIONS_OPTION',
+  'DEFAULT_SERVICE_MAP_ALL_CITIES_OPTION',
+  'DEFAULT_SERVICE_MAP_ALL_CATEGORIES_OPTION',
   'default_service_map_my_location_option',
   'default_all_services_type_option',
   'default_all_providers_option',
@@ -111,6 +129,15 @@ export const HOME_PAGE_DYNAMIC_CONTENT_PLACEHOLDERS = [
   'default_seach_input_text',
   'default_contact_button_label',
   'default_view_service_label',
+  'default_contact_button_label',
+  'default_view_service_label',
+  'default_select_topic',
+  'default_select_subtopic',
+  'default_recent_articles_title',
+  'default_service_type_label',
+  'default_accessibility_label',
+  'default_populations_label',
+  'default_providers_label',
 ];
 
 export const CATEGORY_PLACEHOLDERS = [
@@ -135,25 +162,25 @@ export const ERROR_DYNAMIC_CONTENT_PLACEHOLDERS = [
   'default_error_home_button_title',
 ];
 
-// TODO: Ask your Product manager to get Social media links.
 export function populateSocialMediaLinks(dynamicContent: {
   [key: string]: string;
 }): SocialMediaLinks {
   return {
     facebookLink: {
       title: dynamicContent['default_banner_facebook_title'],
-      // TODO: create Dynamic content with link to Facebook page
-      href: '', // dynamicContent['<site_prefix>_facebook_link']
-    },
-    whatsappLink: {
-      title: dynamicContent['default_banner_whatsapp_title'],
-      // TODO: create Dynamic content with link to Whatsapp page
-      href: '', // dynamicContent['<site_prefix>_whatsapp_link']
+      href: dynamicContent['signpost_julisha_facebook_link'],
     },
     messengerLink: {
       title: dynamicContent['default_banner_messenger_title'],
-      // TODO: create Dynamic content with link to Messenger page
-      href: '', // dynamicContent['<site_prefix>_messenger_link']
+      href: dynamicContent['signpost_julisha_messenger_link'],
+    },
+    whatsappLink: {
+      title: dynamicContent['default_banner_whatsapp_title'],
+      href: dynamicContent['signpost_julisha_whatsapp_link'],
+    },
+    whatsappChannelLink: {
+      title: dynamicContent['default_banner_whatsappchannel_title'],
+      href: dynamicContent['signpost_julisha_whatsappchannel_link'],
     },
   };
 }
@@ -162,8 +189,7 @@ export function populateHeaderBannerStrings(dynamicContent: {
   [key: string]: string;
 }): HeaderBannerStrings {
   return {
-    // TODO: replace welcomeTitle with website-specific Dynamic content ID.
-    welcomeTitle: 'Welcome text.', // dynamicContent['<site_prefix>_mission_statement'],
+    welcomeTitle: dynamicContent['signpost_julisha_mission_statement'],
     socialMediaTitle: dynamicContent['default_banner_social_media_title'],
     socialMediaDescription:
       dynamicContent['default_banner_social_media_description'],
@@ -202,6 +228,10 @@ export function populateServiceMapStrings(dynamicContent: {
     },
     popupStrings: populatePopupStrings(dynamicContent),
     labelSearchInput: { label: dynamicContent['default_seach_input_text'] },
+    labelServicesTypes: dynamicContent['default_service_type_label'],
+    labelAccessibility: dynamicContent['default_accessibility_label'],
+    labelPopulations: dynamicContent['default_populations_label'],
+    labelProvider: dynamicContent['default_providers_label'],
   };
 }
 
@@ -211,8 +241,7 @@ export function populateCategoriesSectionStrings(dynamicContent: {
 }): CardsListStrings {
   return {
     title: dynamicContent['default_information_title'],
-    //TODO: Update to the customized '<site_prefix>_information_description',
-    description: dynamicContent['default_information_description'],
+    description: dynamicContent['signpost_julisha_information_description'],
   };
 }
 
@@ -285,8 +314,6 @@ export function getSelectTopicLabel(dynamicContent: {
   return dynamicContent['default_select_topic'];
 }
 
-// TODO(annkats): add populateServiceMapStrings() once Service map becomes a Shared component.
-
 export function populateArticleContentStrings(dynamicContent: {
   [key: string]: string;
 }): ArticleContentStrings {
@@ -303,6 +330,7 @@ export function populateMenuOverlayStrings(dynamicContent: {
     home: dynamicContent['default_menu_home_title'],
     information: dynamicContent['default_information_title'],
     about: dynamicContent['default_menu_about_title'],
+    disclaimer: dynamicContent['default_menu_disclaimer_title'],
   };
 }
 
@@ -315,6 +343,7 @@ export function populateHomePageStrings(dynamicContent: {
     serviceMapStrings: populateServiceMapStrings(dynamicContent),
     searchBarStrings: populateSearchBarStrings(dynamicContent),
     footerStrings: populateFooterStrings(dynamicContent),
+    recentArticlesStrings: populateRecentArticlesStrings(dynamicContent),
   };
 }
 
@@ -424,6 +453,17 @@ export function populateServicePageStrings(dynamicContent: {
     serviceErrorStrings: generateArticleErrorProps(dynamicContent),
     lastUpdatedLabel: getLastUpdatedLabel(dynamicContent),
     footerStrings: populateFooterStrings(dynamicContent),
+  };
+}
+
+export function populateRecentArticlesStrings(dynamicContent: {
+  [key: string]: string;
+}): RecentArticlesStrings {
+  return {
+    recentArticlesTitle: dynamicContent['default_recent_articles_title'],
+    lastUpdatedLabel: dynamicContent['default_last_updated'],
+    selectTopicLabel: dynamicContent['default_select_topic'],
+    selectSubTopicLabel: dynamicContent['default_select_subtopic'],
   };
 }
 

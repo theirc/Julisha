@@ -11,16 +11,20 @@ export const LOCALES: { [key: string]: Locale } = {
     url: 'en-us',
     direction: 'ltr',
     name: 'English',
-    directus: 'en-US',
+    directus: 'en-EN',
   },
-  // TODO
+  so: { url: 'so', direction: 'ltr', name: 'Soomali', directus: 'so-SO' },
+  sw: { url: 'sw', direction: 'ltr', name: 'Kiswahili', directus: 'sw-SW' },
+  ar: { url: 'ar', direction: 'rtl', name: 'عربي', directus: 'ar-SA' },
 };
 
 export const LOCALE_CODES_TO_CANONICAL_LOCALE_CODES: { [key: string]: string } =
   {
     en: 'en-us',
     'en-us': 'en-us',
-    // TODO
+    so: 'so',
+    sw: 'sw',
+    ar: 'ar',
   };
 
 // Returns the effective locale given locale code.

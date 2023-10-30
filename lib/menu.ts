@@ -16,19 +16,23 @@ import {
 export interface CustomMenuOverlayStrings extends MenuOverlayStrings {
   information: string;
   about: string;
+  disclaimer: string;
 }
 
-// TODO Update footer items if needed.
 export function getFooterItems(
   strings: CustomMenuOverlayStrings,
   categories: ZendeskCategory[] | CategoryWithSections[]
 ): MenuOverlayItem[] {
   let items: MenuOverlayItem[] = [];
-  items.push({ key: 'home', label: strings.home, href: '/' });
+  items.push({
+    key: 'disclaimer',
+    label: strings.disclaimer,
+    href: `/articles/12955282787741`,
+  });
+
   return items;
 }
 
-// TODO Update menu items if needed.
 export function getMenuItems(
   strings: CustomMenuOverlayStrings,
   categories: ZendeskCategory[] | CategoryWithSections[],
@@ -75,6 +79,15 @@ function addMenuItemsInformation(
   strings: CustomMenuOverlayStrings,
   categories: ZendeskCategory[]
 ) {
+  categories.forEach(function (category) {
+    if (category.id.toString() == '1500000107582')
+      items.push({
+        key: 'services',
+        label: category.name,
+        href: '/#service-map',
+      });
+  });
+
   if (categories.length > 0) {
     items.push({
       key: 'information',

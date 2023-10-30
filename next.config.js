@@ -4,10 +4,10 @@ const pack = require('./package.json');
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  swcMinify: true,
+  swcMinify: false,
   // Keep in sync with locales configured in /lib/locale.ts.
   i18n: {
-    locales: ['default', 'en-us' /* TODO */],
+    locales: ['default', 'en-us', 'so', 'sw', 'ar'],
     defaultLocale: 'default',
     localeDetection: false,
   },
@@ -22,15 +22,14 @@ const nextConfig = {
       },
     ];
   },
-  // TODO: add images url to whitelist them
-  // images: {
-  //   remotePatterns: [
-  //     {
-  //       protocol: 'https',
-  //       hostname: 'signpost-greece.zendesk.com',
-  //     },
-  //   ],
-  // },
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'signpost-kenya.zendesk.com',
+      },
+    ],
+  },
   publicRuntimeConfig: {
     version: pack.dependencies['@ircsignpost/signpost-base'],
   },
@@ -43,10 +42,9 @@ module.exports = withLess({
       // See full list of Ant styles here:
       // https://github.com/ant-design/ant-design/blob/master/components/style/themes/default.less
       modifyVars: {
-        // TODO: Update theme colors
-        'primary-color': '#51258F',
-        'secondary-color': '#854ECA',
-        'accent-color': '#13C2C2',
+        'primary-color': '#6286F7',
+        'secondary-color': '#6286F7',
+        'accent-color': '#1890FF',
         'info-color': '@accent-color',
         'alert-info-bg-color': '@accent-color',
         // Override Ant typography.
@@ -69,13 +67,13 @@ module.exports = withLess({
         'header-banner-text-color': 'white',
         // Set search styles.
         'search-icon-color': 'black',
-        'search-icon-bg-color': '@accent-color',
+        'search-icon-bg-color': 'white',
         // Set card styles.
         'card-padding-base': '16px',
         'home-page-card-icon-color': '#141414',
         // Set cookie banner styles.
         'cookie-banner-text': '#000',
-        'cookie-banner-back': '@accent-color',
+        'cookie-banner-back': '#EFEFEF',
         'link-color': '#0000ee',
         'link-hover-color': '#0000eea8',
       },
