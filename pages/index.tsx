@@ -145,18 +145,18 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
     categories = await getCategoriesWithSections(
       currentLocale,
       getZendeskUrl(),
-      (c) => !CATEGORIES_TO_HIDE.includes(c.id)
+      (c) => !CATEGORIES_TO_HIDE.includes(c?.id)
     );
     categories.forEach(({ sections }) => {
       sections.forEach(
-        (s) => (s.icon = SECTION_ICON_NAMES[s.id] || 'help_outline')
+        (s) => (s.icon = SECTION_ICON_NAMES[s?.id] || 'help_outline')
       );
     });
   } else {
     categories = await getCategories(currentLocale, getZendeskUrl());
-    categories = categories.filter((c) => !CATEGORIES_TO_HIDE.includes(c.id));
+    categories = categories.filter((c) => !CATEGORIES_TO_HIDE.includes(c?.id));
     categories.forEach(
-      (c) => (c.icon = CATEGORY_ICON_NAMES[c.id] || 'help_outline')
+      (c) => (c.icon = CATEGORY_ICON_NAMES[c?.id] || 'help_outline')
     );
   }
 
@@ -185,10 +185,41 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
     directus,
     currentLocale.directus
   );
+  const uniqueAccessibilityIdsSet = new Set(
+    services.flatMap((x) =>
+      x.Accessibility.map(
+        (accessibilityItem) => accessibilityItem.accessibility_id
+      )
+    )
+  );
+  const uniqueAccessibilityIdsArray = Array.from(uniqueAccessibilityIdsSet);
+
+  const uniquePopulationsIdsSet = new Set(
+    services.flatMap((x) =>
+      x.Populations.map((population) => population.populations_id)
+    )
+  );
+  const uniquePopulationsIdsArray = Array.from(uniquePopulationsIdsSet);
+
+  const uniqueProvidersIdsSet = new Set(
+    services.flatMap((x) => x.provider?.id)
+  );
+  const uniqueProvidersIdsArray = Array.from(uniqueProvidersIdsSet);
+
   const serviceTypes = await getDirectusServiceCategories(directus);
-  const providers = await getDirectusProviders(directus, DIRECTUS_COUNTRY_ID);
-  const populations = await getDirectusPopulationsServed(directus);
-  const accessibility = await getDirectusAccessibility(directus);
+  const providers = await getDirectusProviders(
+    directus,
+    DIRECTUS_COUNTRY_ID,
+    uniqueProvidersIdsArray
+  );
+  const populations = await getDirectusPopulationsServed(
+    uniquePopulationsIdsArray,
+    directus
+  );
+  const accessibility = await getDirectusAccessibility(
+    uniqueAccessibilityIdsArray,
+    directus
+  );
 
   services?.sort((a, b) =>
     a.name?.normalize().localeCompare(b.name?.normalize())
@@ -199,7 +230,7 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
   const articleCategories = await getCategoriesWithSections(
     currentLocale,
     getZendeskUrl(),
-    (c) => !CATEGORIES_TO_HIDE.includes(c.id)
+    (c) => !CATEGORIES_TO_HIDE.includes(c?.id)
   );
 
   const footerLinks = getFooterItems(
