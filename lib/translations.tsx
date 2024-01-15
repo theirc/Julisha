@@ -117,7 +117,6 @@ export const HOME_PAGE_DYNAMIC_CONTENT_PLACEHOLDERS = [
   'default_all_populations_option',
   'default_all_accessibilities_option',
   'default_distance_away_tooltip',
-  'default_seach_input_text',
   'default_contact_button_label',
   'default_view_service_label',
   'default_select_topic',
@@ -205,11 +204,11 @@ export function populateServiceMapStrings(dynamicContent: {
       informationTooltip: dynamicContent['default_distance_away_tooltip'],
     },
     popupStrings: populatePopupStrings(dynamicContent),
-    labelSearchInput: { label: dynamicContent['default_seach_input_text'] },
     labelServicesTypes: dynamicContent['default_service_type_label'],
     labelAccessibility: dynamicContent['default_accessibility_label'],
     labelPopulations: dynamicContent['default_populations_label'],
     labelProvider: dynamicContent['default_providers_label'],
+    searchListString: dynamicContent['default_search_hint'],
   };
 }
 
@@ -298,6 +297,7 @@ export function populateArticleContentStrings(dynamicContent: {
   return {
     textReaderTitle: dynamicContent['default_article_reader_title'],
     shareButtonStrings: getShareButtonStrings(dynamicContent),
+    homeBreadcrumbString: 'Home',
   };
 }
 
@@ -342,6 +342,7 @@ export function populateCategoryStrings(dynamicContent: {
     searchBarStrings: populateSearchBarStrings(dynamicContent),
     footerStrings: populateFooterStrings(dynamicContent),
     selectSubTopicLabel: dynamicContent['default_select_subtopic'],
+    homeBreadcrumbString: 'Home',
   };
 }
 
@@ -353,6 +354,7 @@ export function populateSectionStrings(dynamicContent: {
     selectTopicLabel: getSelectTopicLabel(dynamicContent),
     searchBarStrings: populateSearchBarStrings(dynamicContent),
     footerStrings: populateFooterStrings(dynamicContent),
+    homeBreadcrumbString: 'Home',
   };
 }
 
