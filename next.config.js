@@ -29,6 +29,10 @@ const nextConfig = {
         protocol: 'https',
         hostname: 'signpost-kenya.zendesk.com',
       },
+      {
+        protocol: 'https',
+        hostname: 'directus-irc.azurewebsites.net',
+      },
     ],
   },
   publicRuntimeConfig: {
