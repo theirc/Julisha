@@ -1,10 +1,6 @@
 import { AlgoliaSearchIndex } from '@ircsignpost/signpost-base/dist/src/search-common';
-import { LatLngExpression } from 'leaflet';
 
 export const SITE_TITLE = 'Julisha';
-export const COUNTRY_ID = 30;
-
-export const MAP_DEFAULT_COORDS: LatLngExpression = [0.0236, 37.9062];
 
 // Cache statically generated pages for 1 hour. The timeout was chosen
 // arbitrarily. Our website has static, non-urgent resources, so we probably do
