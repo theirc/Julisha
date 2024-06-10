@@ -29,7 +29,7 @@ export const SECTION_ICON_NAMES: { [key: string]: string } = {
 };
 
 // A list of category IDs that the site should not display.
-export const CATEGORIES_TO_HIDE: number[] = [12936658889629];
+export const CATEGORIES_TO_HIDE: number[] = [];
 
 // A map from a locale code to Zendesk locale id used for dynamic content translations.
 // https://developer.zendesk.com/api-reference/ticketing/account-configuration/locales/

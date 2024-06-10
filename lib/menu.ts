@@ -49,7 +49,7 @@ export function getMenuItems(
     items.push({
       key: 'about',
       label: strings.about,
-      href: `/articles/${ABOUT_US_ARTICLE_ID}`,
+      href: `/categories/12936658889629`,
     });
   }
   return items;
